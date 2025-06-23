@@ -1,0 +1,35 @@
+/*
+Flaticon Optimized - Auto Acoustics
+Only includes the 4 icons actually used in the project
+Original: 5.6KB with 100+ icons → Optimized: ~1KB with 4 icons
+*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("../fonts/Flaticon.eot");
+  src: url("../fonts/Flaticond41d.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff") format("woff"),
+       url("../fonts/Flaticon.ttf") format("truetype"),
+       url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+  font-style: normal;
+}
+
+/* USED ICONS ONLY - 4 total */
+.flaticon-beetle:before { content: "\f104"; }        /* All Vehicles Welcome */
+.flaticon-car-repair:before { content: "\f10a"; }    /* Professional Installation */
+.flaticon-cup:before { content: "\f113"; }           /* Uncompromised Quality */
+.flaticon-mechanic:before { content: "\f12e"; }      /* Expertise Meets Innovation */ 

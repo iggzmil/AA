@@ -1,0 +1,101 @@
+/*!
+ * Font Awesome Optimized - Auto Acoustics
+ * Only includes the 5 icons actually used in the project
+ * Original: 102KB with 1000+ icons → Optimized: ~10KB with 5 icons
+ */
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../fonts/fa-regular-400.woff2") format("woff2"),
+       url("../fonts/fa-regular-400.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../fonts/fa-solid-900.woff2") format("woff2"),
+       url("../fonts/fa-solid-900.ttf") format("truetype");
+}
+
+.fa,
+.fas,
+.far {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.far {
+  font-weight: 400;
+}
+
+/* USED ICONS ONLY - 5 total */
+
+/* Quote Left - Used in testimonials (5 instances) */
+.fa-quote-left:before {
+  content: "\f10d";
+}
+
+/* Spinner - Used for loading animation */
+.fa-spinner:before {
+  content: "\f110";
+}
+
+/* Spinning animation for loading */
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+/* Fixed width for consistent alignment */
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+/* Location Dot - Used in contact section */
+.fa-location-dot:before {
+  content: "\f3c5";
+}
+
+/* Phone - Used in contact section */
+.fa-phone:before {
+  content: "\f095";
+}
+
+/* Envelope - Used in contact section */
+.fa-envelope:before {
+  content: "\f0e0";
+} 
