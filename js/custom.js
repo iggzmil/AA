@@ -118,48 +118,10 @@ AAACITY.pniceScroll = function () {
 	}
 
 	AAACITY.contactform = function () {
-		var contactform_submit_disabled = false;
-		$(document).on('click','#contactform #submit',function(){
-
-			if ( contactform_submit_disabled ) {
-				return false;
-			}
-
-			var validationStr = false;
-			var textArray = [
-				"contactform_name",
-				"contactform_phone",
-				"contactform_email",
-				"contactform_message",
-			];
-			for (var n = 0; n < textArray.length; n++) {
-				var str = textArray[n],
-					e = document.getElementById(str);
-				if (e) {
-					$('#'+str).css({"border":"1px solid transparent"});
-					if ( ! isNotEmpty(e) ) {
-						validationStr = true;
-						$('#'+str).css({"border-style":"solid","border-width":"1px 1px 1px 1px","border-color":"red"});
-					}
-					if (str == "contactform_email") {
-						var varTestExp=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-						var varEmail = e.value;
-						if (varEmail.search(varTestExp) == -1) {
-							validationStr = true;
-							$('#'+str).css({"border-style":"solid","border-width":"1px 1px 1px 1px","border-color":"red"});
-						}
-					}
-				}
-			}
-
-			if (validationStr) {
-			   return false;
-			}
-			
-			// Contact form submission is now handled by AAACITY.autoAcousticsContactForm
-			// This prevents the old handler from interfering
-			return false;
-		});
+		// Legacy contact form handler - DISABLED
+		// All contact form functionality is now handled by AAACITY.autoAcousticsContactForm
+		// This function is kept for compatibility but does nothing
+		return;
     }
 
 /*************************
@@ -576,7 +538,10 @@ AAACITY.autoAcousticsContactForm = function () {
                 type: 'POST',
                 dataType: 'json',
                 data: formData,
+                timeout: 30000, // 30 second timeout
                 success: function(response) {
+                    console.log('Contact form response:', response);
+                    
                     if (response.success) {
                         $contactForm.find('.is-valid, .is-invalid').removeClass('is-valid is-invalid');
                         $contactForm.find('.invalid-feedback, .valid-feedback').remove();
@@ -609,9 +574,23 @@ AAACITY.autoAcousticsContactForm = function () {
                     }
                 },
                 error: function(xhr, status, error) {
+                    console.log('Contact form error:', {xhr: xhr, status: status, error: error});
+                    
+                    var errorMessage = 'Sorry, there was a problem sending your message. Please try again later.';
+                    
+                    if (status === 'timeout') {
+                        errorMessage = 'The request timed out. Please check your internet connection and try again.';
+                    } else if (status === 'parsererror') {
+                        errorMessage = 'There was an error processing the server response. Please try again.';
+                    } else if (xhr.status === 404) {
+                        errorMessage = 'Contact form handler not found. Please contact us directly.';
+                    } else if (xhr.status === 500) {
+                        errorMessage = 'Server error occurred. Please try again later or contact us directly.';
+                    }
+                    
                     $('#formmessage')
                         .removeClass('success').addClass('error')
-                        .html('<div class="alert alert-danger">Sorry, there was a problem sending your message. Please try again later.</div>')
+                        .html('<div class="alert alert-danger">' + errorMessage + '</div>')
                         .show();
                 },
                 complete: function() {
