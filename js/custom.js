@@ -155,30 +155,9 @@ AAACITY.pniceScroll = function () {
 			if (validationStr) {
 			   return false;
 			}
-			$.ajax({
-				type : "POST",
-				dataType:'json',
-				url : "php/contact-form.php",
-				data : $('#contactform').serialize(),
-				beforeSend : function(arr, $form, options){
-					contactform_submit_disabled = true;
-					$( '#contactform #submit .btn-loader' ).show();
-				},
-				success : function (data) {
-					if ( data.status == 'success' ) {
-						$( '#contactform' )[0].reset();
-					}
-					$( '#contactform #submit .btn-loader' ).hide();
-					$( '#formmessage' ).fadeIn();
-					$( '#formmessage' ).html(data.msg).delay(4000).fadeOut('slow');
-					contactform_submit_disabled = false;
-				},
-				error: function(msg){
-					$( '#contactform #submit .btn-loader' ).hide();
-					AAACITY.showToast('Something went wrong! Please try again.', 'error');
-					contactform_submit_disabled = false;
-				}
-			});
+			
+			// Contact form submission is now handled by AAACITY.autoAcousticsContactForm
+			// This prevents the old handler from interfering
 			return false;
 		});
     }
