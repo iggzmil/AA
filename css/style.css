@@ -1631,7 +1631,7 @@ footer .copyright ul li a:hover {
 /* New Footer Style */
 .footer .social-footer {
   padding: 35px 0px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: none;
   align-items: center;
 }
 .footer .social-footer .footer-logo .site-logo {
@@ -2877,6 +2877,11 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
 
 @media (max-width: 767px) {
   .container { max-width: 100% !important; }
+  
+  /* Hide back to top car button on mobile devices */
+  .car-top {
+    display: none !important;
+  }
   
   .banner .banner-bg-text { margin-right: 0 !important; margin-left: 0 !important; margin-top: 0 !important; overflow: hidden; }
   .banner .banner-bg-text img { width: 100% !important; height: auto !important; max-width: 100% !important; object-fit: contain; }
