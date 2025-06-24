@@ -281,10 +281,42 @@ AAACITY.removeToast = function (toastId) {
   }
 
 /*************************
+  Reset Loading States
+*************************/
+AAACITY.resetLoadingStates = function() {
+    console.log('Resetting all loading states');
+    
+    // Reset cursor for all elements
+    $('body, html, *').css('cursor', 'auto');
+    
+    // Reset form states
+    $('#submit').prop('disabled', false);
+    $('.btn-loader, .spinner').hide();
+    
+    // Clear any processing flags
+    if (window.contactform_submit_disabled) {
+        window.contactform_submit_disabled = false;
+    }
+    
+    // Remove any loading classes
+    $('body').removeClass('loading processing submitting');
+    
+    console.log('Loading states reset complete');
+};
+
+// Make reset function globally available
+window.resetContactForm = AAACITY.resetLoadingStates;
+
+/*************************
   Auto Acoustics Contact Form Handler
 *************************/
 AAACITY.autoAcousticsContactForm = function () {
     var $contactForm = $('#contactform');
+    
+    // Reset any stuck loading states on page load
+    $('body').css('cursor', 'auto');
+    $('#submit').prop('disabled', false);
+    $('.btn-loader').hide();
     
     if ($contactForm.length) {
         
@@ -489,6 +521,16 @@ AAACITY.autoAcousticsContactForm = function () {
         // Form submission handler
         $contactForm.on('submit', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Contact form submit event triggered');
+            
+            // Ensure we're not already processing
+            var $submitBtn = $('#submit');
+            if ($submitBtn.prop('disabled')) {
+                console.log('Form submission already in progress, ignoring');
+                return false;
+            }
             
             var formData = {
                 name: $('#contactform_name').val(),
@@ -496,6 +538,8 @@ AAACITY.autoAcousticsContactForm = function () {
                 phone: $('#contactform_phone').val(),
                 message: $('#contactform_message').val()
             };
+            
+            console.log('Form data collected:', formData);
             
             $('#formmessage').hide().removeClass('success error').text('');
             
@@ -594,8 +638,20 @@ AAACITY.autoAcousticsContactForm = function () {
                         .show();
                 },
                 complete: function() {
+                    console.log('AJAX request completed, resetting form state');
                     $submitBtn.prop('disabled', false);
                     $spinner.hide();
+                    
+                    // Ensure cursor is reset
+                    $('body').css('cursor', 'auto');
+                    $contactForm.css('cursor', 'auto');
+                    
+                    // Scroll to message if visible
+                    if ($('#formmessage').is(':visible')) {
+                        $('html, body').animate({
+                            scrollTop: $('#formmessage').offset().top - 100
+                        }, 500);
+                    }
                 }
             });
         });
@@ -878,10 +934,14 @@ AAACITY.galleryZoom = function () {
 $window.on("load",function(){
     AAACITY.preloader();
     AAACITY.Isotope();
+    AAACITY.resetLoadingStates(); // Reset any stuck loading states
 });
 
 //Document ready functions  
 $document.ready(function () {
+    // Reset any stuck loading states immediately
+    AAACITY.resetLoadingStates();
+    
     AAACITY.carousel();
     AAACITY.colourvariant();
     AAACITY.pniceScroll();
