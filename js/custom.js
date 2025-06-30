@@ -82,11 +82,53 @@ AAACITY.pniceScroll = function () {
         var target = $(this.getAttribute('href'));
         if (target.length) {
             e.preventDefault();
+            
+            // Special handling for contact section to ensure full visibility
+            var scrollOffset = 60; // default offset
+            var href = this.getAttribute('href');
+            
+            if (href === '#contact-section') {
+                // For contact section, calculate optimal offset to show entire section
+                var contactSection = $('#contact-section');
+                var contactMap = $('.contact-map');
+                var windowHeight = $(window).height();
+                var contactSectionHeight = contactSection.outerHeight();
+                var mapHeight = contactMap.length ? contactMap.outerHeight() : 0;
+                var totalContactHeight = contactSectionHeight + mapHeight;
+                
+                // If the contact section + map is taller than viewport, use minimal offset
+                // Otherwise, calculate offset to center or show the complete section
+                if (totalContactHeight > windowHeight) {
+                    scrollOffset = 20; // minimal offset for tall sections
+                } else {
+                    // Calculate offset to show the complete contact experience
+                    scrollOffset = Math.max(20, (windowHeight - totalContactHeight) / 4);
+                }
+            }
+            
             $('html, body').animate({
-                scrollTop: target.offset().top - 60
+                scrollTop: target.offset().top - scrollOffset
             }, {
-                duration: 800,
-                easing: 'swing'
+                duration: 1000, // slightly longer duration for contact section
+                easing: 'swing',
+                complete: function() {
+                    // Ensure we're showing the contact section properly
+                    if (href === '#contact-section') {
+                        // Add a small delay and fine-tune scroll position if needed
+                        setTimeout(function() {
+                            var currentScroll = $(window).scrollTop();
+                            var targetTop = target.offset().top;
+                            var finalOffset = href === '#contact-section' ? 20 : 60;
+                            
+                            // Only adjust if we're significantly off
+                            if (Math.abs(currentScroll - (targetTop - finalOffset)) > 10) {
+                                $('html, body').animate({
+                                    scrollTop: targetTop - finalOffset
+                                }, 200);
+                            }
+                        }, 100);
+                    }
+                }
             });
         }
     });
