@@ -2910,6 +2910,21 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
 footer a {
   cursor: pointer !important;
 }
+
+/* Reduce spacing between services section and CTA */
+.page-section-ptb.gray-bg + .pt-0.pb-5.gray-bg {
+  margin-top: -40px;
+}
+
+/* Alternative: Reduce bottom padding of services section when followed by CTA */
+.page-section-ptb.gray-bg:has(+ .pt-0.pb-5.gray-bg) {
+  padding-bottom: 40px;
+}
+
+/* Fallback for better browser support */
+.services-section-reduced-bottom {
+  padding-bottom: 40px !important;
+}
 .question-span-bold { display: block; margin: 15px 0; font-size: 18px; color: #000000; }
 .iframe-border-none { border: 0; }
 
