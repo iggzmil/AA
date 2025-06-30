@@ -2904,6 +2904,12 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
 .footer-simple { padding: 20px 0; background: #000000; }
 .footer-logo { max-height: 50px; }
 .footer-copyright { font-size: 14px; line-height: 1.4; }
+
+/* Ensure footer links show pointer cursor */
+.footer-3.footer-simple a,
+footer a {
+  cursor: pointer !important;
+}
 .question-span-bold { display: block; margin: 15px 0; font-size: 18px; color: #000000; }
 .iframe-border-none { border: 0; }
 
