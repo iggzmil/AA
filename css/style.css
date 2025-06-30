@@ -35,6 +35,11 @@
 /*************************
     General
 *************************/
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: var(--body-font);
   font-weight: normal;
@@ -42,14 +47,20 @@ body {
   font-size: 17px;
   line-height: 28px;
   color: var(--cd-tertiary-color);
+  background-color: #ffffff;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scroll-padding-top: 80px;
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
 }
 
 /* Smooth section transitions */
@@ -405,6 +416,7 @@ select {
     Button
 *************************/
 .button {
+  cursor: pointer !important;
   text-align: center;
   background: #db2d2e;
   color: #ffffff;
@@ -441,6 +453,12 @@ select {
   -ms-transform: scaleY(0);
   -moz-transform: scaleY(0);
   -o-transform: scaleY(0);
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  -ms-transform-origin: 50% 100%;
+  -moz-transform: scaleY(0);
+  -o-transform: scaleY(0);
+  -ms-transform: scaleY(0);
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
   -ms-transform-origin: 50% 100%;
@@ -1961,8 +1979,17 @@ footer .copyright ul li a:hover {
   height: auto;
   object-fit: contain;
   transition: all 0.3s ease;
+  cursor: pointer !important;
 }
 .feature-box:hover .brand-logo { transform: scale(1.1); }
+
+/* Brand Logo Links Cursor Fix */
+.feature-box .icon a,
+.feature-box .icon a:hover,
+.feature-box a,
+.feature-box a:hover {
+  cursor: pointer !important;
+}
 
 
 /*************************************
@@ -1982,6 +2009,73 @@ footer .copyright ul li a:hover {
   right: -180px;
 }
 .our-service-section { padding-bottom: 250px; }
+
+/* Our Work on Display - Car Image Gallery Cursor Fix */
+.car-item .car-image {
+  position: relative;
+  overflow: hidden;
+  height: 250px;
+  cursor: pointer !important;
+  transition: transform 0.3s ease;
+}
+.car-item .car-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: all 0.5s ease;
+  cursor: pointer !important;
+}
+.car-item .car-image:hover { 
+  transform: scale(1.02); 
+  cursor: pointer !important;
+}
+.car-item .car-image .date {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 5;
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: none;
+}
+.car-item .car-image .date span {
+  padding: 8px 16px;
+  background: #db2d2e;
+  line-height: 18px;
+  color: #ffffff;
+  font-weight: 600;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+.car-item .car-image:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+.car-item:hover .car-image:before { background: rgba(0, 0, 0, 0.2); }
+
+/* Additional Grid Item Cursor Fix */
+.grid-item,
+.grid-item .car-item,
+.isotope .grid-item {
+  cursor: pointer !important;
+}
+.grid-item:hover,
+.grid-item .car-item:hover,
+.isotope .grid-item:hover {
+  cursor: pointer !important;
+}
 
 
 /*************************************
@@ -2481,6 +2575,7 @@ form.gray-form .form-notice p {
   color: #363636;
   text-decoration: none;
   padding: 11px 60px;
+  cursor: pointer !important;
   -webkit-transition: all 0.27s cubic-bezier(0.000, 0.000, 0.580, 1.000);
   transition: all 0.27s cubic-bezier(0.000, 0.000, 0.580, 1.000);
 }
@@ -2488,6 +2583,7 @@ form.gray-form .form-notice p {
   text-decoration: none;
   background-color: transparent;
   color: #db2d2e;
+  cursor: pointer !important;
 }
 .accordion .accordion-header .accordion-button {
   color: #fff;
@@ -2496,10 +2592,29 @@ form.gray-form .form-notice p {
   font-weight: 700;
   line-height: 24px;
   background-color: #db2d2e;
-  cursor: default;
+  cursor: pointer !important;
   margin-top: 20px;
   border: 1px solid #db2d2e;
   padding: 11px 60px;
+}
+.accordion .accordion-header .accordion-button:hover {
+  color: #ffffff;
+  cursor: pointer !important;
+}
+
+/* Additional specificity for accordion button cursor */
+.accordion .accordion-button,
+.accordion .accordion-button.collapsed,
+.accordion-button,
+.accordion-button.collapsed {
+  cursor: pointer !important;
+}
+
+.accordion .accordion-button:hover,
+.accordion .accordion-button.collapsed:hover,
+.accordion-button:hover,
+.accordion-button.collapsed:hover {
+  cursor: pointer !important;
 }
 .accordion .accordion-header .accordion-button.collapsed:after {
   content: "\f078";
@@ -3044,4 +3159,36 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
   .content-box-7 .content-box-img .info p {
     text-shadow: 2px 2px 0 rgba(0,0,0,1);
   }
+}
+
+.logo-button, .logo-button img {
+    cursor: pointer !important;
+}
+
+/* Contact Information Links */
+.feature-box-3 .content a {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  transition: all 0.3s ease;
+}
+
+.feature-box-3 .content a:hover {
+  cursor: pointer !important;
+  color: #db2d2e !important;
+  opacity: 0.8 !important;
+  transform: translateY(-1px);
+}
+
+.feature-box-3 .content a:hover p {
+  color: #db2d2e !important;
+  cursor: pointer !important;
+}
+
+.feature-box-3 .content a:hover .text-red {
+  color: #db2d2e !important;
+}
+
+.feature-box-3 .content a p {
+  cursor: pointer !important;
+  transition: color 0.3s ease;
 }
