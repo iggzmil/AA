@@ -239,7 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailHtml = createContactEmailHtml($sanitizedData);
 
     // Set the recipient email
-    $recipientEmail = 'iggzmil@gmail.com'; // Send all form submissions to this email
+    $recipientEmail = 'autoacoustics@gmail.com'; // Send all form submissions to this email
     
     // Set the subject format
     $emailSubject = 'Auto Acoustics Contact Form Submission';
