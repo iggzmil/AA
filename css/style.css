@@ -2925,6 +2925,23 @@ footer a {
 .services-section-reduced-bottom {
   padding-bottom: 40px !important;
 }
+
+/* Ensure consistent CTA section spacing and logo sizing */
+.halp-call {
+  margin-top: 0 !important;
+}
+
+.halp-call-padding {
+  padding-top: 30px !important;
+}
+
+/* Ensure consistent logo sizing in all CTA sections */
+.halp-call .aa-logo,
+.halp-call img[src*="AA_logo_emblem"] {
+  width: 120px !important;
+  height: auto !important;
+  margin-bottom: 15px !important;
+}
 .question-span-bold { display: block; margin: 15px 0; font-size: 18px; color: #000000; }
 .iframe-border-none { border: 0; }
 
